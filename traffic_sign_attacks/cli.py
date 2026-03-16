@@ -10,7 +10,7 @@ from .pipeline import run_pipeline
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Generate shadow and occlusion adversarial variants for GTSRB."
+        description="Generate physical shadow and occlusion adversarial variants for traffic sign images."
     )
     parser.add_argument("--config", required=True, help="Path to the YAML config file.")
     return parser

@@ -1,0 +1,67 @@
+# Dataset root that contains your images and the annotation CSV.
+dataset_root: /path/to/traffic_sign_dataset
+
+# CSV manifest relative to dataset_root, or an absolute path.
+# Leave this empty for datasets that already include Train.csv/Test.csv at dataset_root.
+annotation_file:
+
+output_root: ./generated
+split: test
+seed: 7
+limit:
+output_extension: .png
+
+# Used only when the CSV does not include a split column and split=all.
+default_split_name: dataset
+
+# Used only when the CSV and shape_map do not provide a shape.
+default_shape: box
+
+# Optional class-id metadata fallbacks.
+label_map: {}
+shape_map: {}
+
+# Expected CSV columns:
+# Required:
+#   path, class_id
+# Optional:
+#   split, label, shape, width, height, roi_x1, roi_y1, roi_x2, roi_y2, sample_id
+# Notes:
+#   - If width/height are missing, they are read from the image.
+#   - If ROI is missing, the full image is attacked.
+#   - shape values should be one of:
+#     circle, triangle, triangle_inverted, diamond, octagon, box
+
+physical_transform:
+  enabled: true
+  rotation_degrees: [-5.0, 5.0]
+  brightness: [0.90, 1.10]
+  contrast: [0.90, 1.10]
+  gaussian_blur_radius: [0.0, 1.25]
+
+attacks:
+  shadow:
+    enabled: true
+    variants_per_image: 1
+    coefficient_range: [0.35, 0.55]
+    coverage_ratio: [0.15, 0.55]
+    edge_blur_radius: [1.5, 3.0]
+    max_sampling_attempts: 24
+
+  occlusion:
+    enabled: true
+    variants_per_image: 1
+    styles:
+      - edge_patch
+      - center_sticker
+      - diagonal_band
+    opacity_range: [0.80, 1.00]
+    edge_band_width_ratio: [0.03, 0.06]
+    center_area_ratio: [0.08, 0.18]
+    diagonal_band_width_ratio: [0.10, 0.18]
+    palette:
+      - "#1A1A1A"
+      - "#2F2F2F"
+      - "#5D4037"
+      - "#6B7280"
+      - "#8C7A5B"

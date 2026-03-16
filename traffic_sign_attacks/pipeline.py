@@ -7,7 +7,7 @@ from typing import Any
 
 from PIL import Image
 
-from .datasets import load_gtsrb_samples
+from .datasets import load_dataset_samples
 from .occlusion import generate_occlusion_attack
 from .shadow import generate_shadow_attack
 from .utils import ensure_dir, maybe_apply_physical_transform, relative_to, to_serializable
@@ -39,7 +39,7 @@ def run_pipeline(config: dict[str, Any]) -> dict[str, Any]:
 
     ensure_dir(output_root)
     manifest_path = output_root / "manifest.csv"
-    samples = load_gtsrb_samples(dataset_root, split)
+    samples = load_dataset_samples(dataset_root, split, config)
     if limit is not None:
         samples = samples[: int(limit)]
 

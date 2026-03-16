@@ -1,4 +1,4 @@
-"""Traffic-sign adversarial dataset generation utilities."""
+"""Physical adversarial attack generation utilities for traffic sign images."""
 
 from .pipeline import run_pipeline
 
